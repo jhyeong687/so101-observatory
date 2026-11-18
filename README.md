@@ -18,4 +18,4 @@ python tools/archive.py /path/to/vision_trace --watch --push
 
 `docs/runs/<id>/result.json`에는 시작 시각과 모델, 상승 높이, 낙하 횟수, 재파지 후 운반 거리, 최종 이동 거리, 바닥 접촉 판정, 관찰별 판단이 저장됩니다. `view-*.jpg`는 각 행동을 선택한 시점의 사진입니다. `replay.mp4`는 동작 위주로 기록하며 판단 대기 시간은 압축합니다. 카메라 장착 치수는 실물 보정 전의 임시값입니다.
 
-SO-101 모델 출처는 [MuJoCo Menagerie](https://github.com/google-deepmind/mujoco_menagerie/tree/main/robotstudio_so101)입니다. 헤더는 같은 시뮬레이터 모델을 별도 시점에서 렌더링했습니다. Barlow Condensed 글꼴은 SIL Open Font License로 배포됩니다.
+SO-101 모델 출처는 [MuJoCo Menagerie](https://github.com/google-deepmind/mujoco_menagerie/tree/main/robotstudio_so101)입니다. 카메라 배치도는 같은 시뮬레이터 모델을 측면에서 렌더링하고 가상 카메라의 장면 좌표를 투영해 표시했습니다. 결과 그림은 각 행동 직전의 실제 시뮬레이션 관측에서 같은 영역을 잘라 비교한 것입니다.

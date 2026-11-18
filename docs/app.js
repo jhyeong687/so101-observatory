@@ -75,11 +75,35 @@ function writeMetrics(result) {
   const root=byId("metrics");root.replaceChildren();
   const metrics=[["첫 상승",result.lifts_cm[0],"cm"],["재파지 후 상승",result.lifts_cm[1],"cm"],["중간 낙하",result.drops,"회"],["최종 왼쪽 이동",result.final_left_cm,"cm"]];
   for(const [label,value,unit] of metrics) {
-    const box=document.createElement("dl");box.className="metric";box.style.margin="0";
-    const dt=document.createElement("dt"),dd=document.createElement("dd"),suffix=document.createElement("small");
-    dt.textContent=label;dd.textContent=String(value);suffix.textContent=unit;
-    dd.append(suffix);box.append(dt,dd);root.append(box);
+    const row=root.insertRow();
+    const th=document.createElement("th");
+    th.scope="row";th.textContent=label;th.style.fontWeight="400";
+    row.append(th);
+    row.insertCell().textContent=value+" "+unit;
   }
+}
+async function writeRecoveryFigure(run,base,revision) {
+  const wrapper=byId("recovery-figure");
+  wrapper.hidden=true;
+  const steps=run.decisions;
+  const lifts=steps.filter(s=>s.command.action==="lift");
+  const recovery=steps.find(s=>s.command.action==="aim" && lifts[0] && s.seq>lifts[0].seq);
+  const next=s=>s && steps.find(step=>step.seq===s.seq+1);
+  const selection=[[next(lifts[0]),"(a) 첫 상승"],[recovery,"(b) 낙하 후 재관측"],[next(lifts[1]),"(c) 재파지 후 상승"]];
+  if(!run.result.landed_after_drop || run.result.lifts_cm[1]<=0 || selection.some(([s])=>!s?.observation)) return;
+  try {
+    const photos=await Promise.all(selection.map(async ([step,label])=>{
+      const im=await loadImage(base+step.observation);
+      const panel=document.createElement("div"),canvas=document.createElement("canvas"),text=document.createElement("span");
+      canvas.width=420;canvas.height=250;
+      canvas.setAttribute("aria-label",label+" 시점의 베이스 카메라 프레임");
+      canvas.getContext("2d").drawImage(im,65,360+42,420,250,0,0,420,250);
+      text.textContent=label;panel.append(canvas,text);
+      return panel;
+    }));
+    if(revision!==state.revision) return;
+    byId("recovery-frames").replaceChildren(...photos);wrapper.hidden=false;
+  } catch { /* Individual observations remain available through the decision log. */ }
 }
 function writeDecisions(run,base) {
   const list=byId("steps");list.replaceChildren();
@@ -110,12 +134,14 @@ async function selectRun(id) {
   byId("run-title").textContent=run.title;
   const result=run.result;
   const recovered=result.drops===1 && result.landed_after_drop && result.lifts_cm[1]>0 && result.second_carry_cm>0 && result.final_left_cm>0 && result.released_on_floor;
-  byId("outcome").textContent=recovered?"재파지 · 배치 성공":"측정 완료";
+  byId("outcome").textContent=recovered
+    ? "블록을 한 차례 떨어뜨린 뒤 새 영상에서 다시 찾아 잡았다. 최종 위치는 시작점에서 왼쪽으로 "+result.final_left_cm+" cm였고, 집게를 물린 뒤 바닥 접촉을 확인했다."
+    : "아래 표는 이 실행에서 기록한 물체 중심의 이동과 중간 낙하 횟수다.";
   byId("outcome").hidden=false;
   byId("replay").src=base+"replay.mp4";
   byId("download").href=base+"result.json";
   byId("movie-file").href=base+"replay.mp4";
-  writeMetrics(result);writeDecisions(run,base);
+  writeMetrics(result);writeDecisions(run,base);void writeRecoveryFigure(run,base,revision);
   if(!state.fresh && byId("signal").dataset.status==="offline") {
     signal("offline","오프라인","선택한 실험의 마지막 저장 화면입니다.");
     void showSavedFrame();
