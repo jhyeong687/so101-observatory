@@ -1,0 +1,176 @@
+{
+  "id": "1794979571729429000",
+  "date": "2026-11-18T14:26:11+09:00",
+  "model": "Astra 6",
+  "title": "낙하 후 블록 재파지",
+  "label": "2026.11.18 14:26 KST",
+  "target_lift_cm": 2,
+  "result": {
+    "lifts_cm": [
+      1.95,
+      1.94
+    ],
+    "drops": 1,
+    "released_on_floor": true,
+    "landed_after_drop": true,
+    "first_carry_cm": 4.1,
+    "second_carry_cm": 4.86,
+    "final_left_cm": 15.03
+  },
+  "cameras": [
+    "wrist",
+    "belly",
+    "top"
+  ],
+  "camera_calibration": "provisional",
+  "decisions": [
+    {
+      "seq": 0,
+      "observation": "view-000.jpg",
+      "command": {
+        "action": "aim",
+        "camera": "top",
+        "u": 344,
+        "v": 107,
+        "surface_z": 0.06,
+        "note": "The upright green block has a visible bright top face.",
+        "seq": 0
+      }
+    },
+    {
+      "seq": 1,
+      "observation": "view-001.jpg",
+      "command": {
+        "action": "descend",
+        "note": "The open jaws are positioned above the upright green block.",
+        "seq": 1
+      }
+    },
+    {
+      "seq": 2,
+      "observation": "view-002.jpg",
+      "command": {
+        "action": "close",
+        "note": "The jaws flank the upright block at grasping height.",
+        "seq": 2
+      }
+    },
+    {
+      "seq": 3,
+      "observation": "view-003.jpg",
+      "command": {
+        "action": "lift",
+        "dz": 0.02,
+        "note": "The closed jaws surround the green block.",
+        "seq": 3
+      }
+    },
+    {
+      "seq": 4,
+      "observation": "view-004.jpg",
+      "command": {
+        "action": "carry",
+        "dy": 0.08,
+        "note": "The green block is held above the table with visible clearance.",
+        "seq": 4
+      }
+    },
+    {
+      "seq": 5,
+      "observation": "view-005.jpg",
+      "command": {
+        "action": "park",
+        "note": "The jaws have opened and the block has landed upright; the arm obscures its top view.",
+        "seq": 5
+      }
+    },
+    {
+      "seq": 6,
+      "observation": "view-006.jpg",
+      "command": {
+        "action": "aim",
+        "camera": "top",
+        "u": 314,
+        "v": 105,
+        "surface_z": 0.06,
+        "note": "The dropped block remains upright with its top face clearly visible.",
+        "seq": 6
+      }
+    },
+    {
+      "seq": 7,
+      "observation": "view-007.jpg",
+      "command": {
+        "action": "descend",
+        "note": "The open jaws are aligned above the upright block for regrasping.",
+        "seq": 7
+      }
+    },
+    {
+      "seq": 8,
+      "observation": "view-008.jpg",
+      "command": {
+        "action": "close",
+        "note": "The open jaws flank the upright block at regrasping height.",
+        "seq": 8
+      }
+    },
+    {
+      "seq": 9,
+      "observation": "view-009.jpg",
+      "command": {
+        "action": "lift",
+        "dz": 0.02,
+        "note": "The jaws are closed around the upright block for the second lift.",
+        "seq": 9
+      }
+    },
+    {
+      "seq": 10,
+      "observation": "view-010.jpg",
+      "command": {
+        "action": "carry",
+        "dy": 0.045,
+        "note": "The regrasped block is visibly raised above the table.",
+        "seq": 10
+      }
+    },
+    {
+      "seq": 11,
+      "observation": "view-011.jpg",
+      "command": {
+        "action": "lower",
+        "dz": -0.02,
+        "note": "The block remains held above the table after moving farther left.",
+        "seq": 11
+      }
+    },
+    {
+      "seq": 12,
+      "observation": "view-012.jpg",
+      "command": {
+        "action": "open",
+        "note": "The block has been lowered to the table at the farther-left placement.",
+        "seq": 12
+      }
+    },
+    {
+      "seq": 13,
+      "observation": "view-013.jpg",
+      "command": {
+        "action": "park",
+        "note": "The released block rests on the table; withdrawing will clear the view for verification.",
+        "seq": 13
+      }
+    },
+    {
+      "seq": 14,
+      "observation": "view-014.jpg",
+      "command": {
+        "action": "finish",
+        "note": "After withdrawal, the released block is visible resting on its side farther left on the table.",
+        "seq": 14
+      }
+    }
+  ]
+}
