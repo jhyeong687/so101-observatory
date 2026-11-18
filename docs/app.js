@@ -135,7 +135,7 @@ async function selectRun(id) {
   const result=run.result;
   const recovered=result.drops===1 && result.landed_after_drop && result.lifts_cm[1]>0 && result.second_carry_cm>0 && result.final_left_cm>0 && result.released_on_floor;
   byId("outcome").textContent=recovered
-    ? "블록을 한 차례 떨어뜨린 뒤 새 영상에서 다시 찾아 잡았다. 최종 위치는 시작점에서 왼쪽으로 "+result.final_left_cm+" cm였고, 집게를 물린 뒤 바닥 접촉을 확인했다."
+    ? "블록을 한 차례 떨어뜨린 뒤 새 영상에서 다시 찾아 잡았다. 최종 위치는 시작점에서 왼쪽으로 "+result.final_left_cm+" cm였다. 집게를 열고 팔을 치운 뒤에도 블록은 바닥에 놓여 있었다."
     : "아래 표는 이 실행에서 기록한 물체 중심의 이동과 중간 낙하 횟수다.";
   byId("outcome").hidden=false;
   byId("replay").src=base+"replay.mp4";
