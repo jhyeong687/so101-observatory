@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#f6f6f0"><title>SO-ARM101 실험 관측소</title>
+<meta name="description" content="SO-ARM101의 세 카메라를 실시간으로 보고 블록 운반과 재파지 실험을 다시 봅니다.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect rx='14' width='64' height='64' fill='%23232823'/%3E%3Cpath d='M12 47h15l-8-17 19-15 12 8' stroke='%23d3ee87' stroke-width='6' fill='none'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="style.css"><script type="module" src="app.js"></script></head>
+<body>
+<header class="mast"><div class="wrap nav"><a href="#home" class="brand" aria-label="SO101 LAB 처음으로"><span class="brandmark" aria-hidden="true">⌁</span>SO101<span class="brandlight">/ LAB</span></a><nav><a href="#monitor">관측 화면</a><a href="#archive">실험 기록</a><a href="https://github.com/jhyeong687/so101-observatory" class="gh">GitHub ↗</a></nav></div></header>
+<main id="home" class="wrap">
+<section class="hero" aria-labelledby="title"><div class="hero-text"><div class="eyebrow"><i></i> ROBOTICS EXPERIMENT LOG</div>
+<h1 id="title"><span>SO-ARM101</span><br>실험 관측소</h1>
+<p>세 카메라로 로봇의 손끝을 따라가며<br class="mobile"> 블록을 놓치고 다시 잡는 과정을 살펴봅니다.</p>
+<a class="button" href="#monitor">관측 화면 보기 <b aria-hidden="true">↓</b></a></div>
+<figure class="rig"><div class="rig-img"><img src="assets/rig.webp" alt="베이스 뒤 셀카봉과 세 카메라를 갖춘 보라색 SO-ARM101 시뮬레이션 모델"></div>
+<figcaption><span class="cross">⌖</span> MuJoCo 모델 <span>후방 셀카봉 장착</span></figcaption></figure></section>
+<section class="monitor section" id="monitor" aria-labelledby="monitor-title"><div class="section-top"><div><span class="eyebrow">CAMERA MONITOR</span><h2 id="monitor-title">관측 화면</h2></div>
+<div class="switch" aria-label="관측 모드"><button id="live-btn" aria-pressed="true">라이브</button><button id="replay-btn" aria-pressed="false">다시보기</button></div></div>
+<div id="live-pane"><div class="feed-grid">
+<figure class="feed primary"><figcaption><span class="camera-id">BELLY</span><span>베이스 카메라</span></figcaption><canvas id="belly" width="640" height="360" aria-label="베이스 카메라 영상"></canvas></figure>
+<figure class="feed"><figcaption><span class="camera-id">TOP</span><span>후방 셀카봉</span></figcaption><canvas id="top" width="640" height="360" aria-label="후방 탑 카메라 영상"></canvas></figure>
+<figure class="feed"><figcaption><span class="camera-id">WRIST</span><span>손목 카메라</span></figcaption><canvas id="wrist" width="640" height="360" aria-label="손목 카메라 영상"></canvas></figure></div>
+<div class="feed-status"><strong id="signal" data-status="pending"><i></i><span>연결 중</span></strong><span id="note" role="status">시뮬레이터에 연결하고 있어요.</span><time id="frame-time"></time></div></div>
+<div id="replay-pane" hidden><video id="replay" controls playsinline preload="metadata" aria-label="선택한 실험의 손목, 베이스, 탑 카메라 다시보기"></video>
+<p class="caption" id="replay-caption">손목 · 베이스 · 탑 순서로 녹화한 영상입니다. 판단 대기 구간은 압축했습니다.</p></div>
+</section>
+<section class="section" id="archive" aria-labelledby="archive-title"><div class="section-top"><div><span class="eyebrow">EXPERIMENT ARCHIVE</span><h2 id="archive-title">실험 기록</h2></div><label class="run-select">실험 선택 <select id="runs" aria-label="기록된 실험 선택"></select></label></div>
+<article class="record"><div class="record-heading"><div><div id="run-meta" class="mono">기록 불러오는 중</div><h3 id="run-title">낙하 후 블록 재파지</h3></div><span id="outcome" class="tag" hidden></span></div>
+<div id="metrics" class="metrics"></div>
+<div class="record-actions"><button id="watch" class="button muted">▷ &nbsp; 녹화 보기</button><a id="download" class="link-button" download="so101-result.json">결과 JSON ↓</a><a id="movie-file" class="link-button" download="so101-replay.mp4">영상 MP4 ↓</a></div></article>
+<details id="decisions"><summary>카메라 관찰과 행동 기록 <span id="steps-count"></span></summary><div class="decisions"><ol id="steps"></ol><div id="obs" hidden><p class="caption">선택한 행동 직전의 사진 · 손목 / 베이스 / 탑</p><img id="step-img" alt="선택한 단계에서 동기화한 세 카메라"></div></div></details>
+<details><summary>시뮬레이션 설정과 관절 범위</summary><div class="details-body"><p>탑카메라는 베이스 뒤쪽 소켓의 셀카봉에 장착했습니다. 카메라 각도와 치수는 실측 전 임시값입니다. 아래 값은 시뮬레이션의 기준 자세에서 한 관절씩 움직여 측정한 각도입니다.</p><table><thead><tr><th>관절</th><th>모델 한계</th><th>측정 범위</th></tr></thead><tbody id="joints"></tbody></table></div></details>
+</section></main><footer><div class="wrap"><span class="foot-brand">SO101 / LAB</span><a href="https://github.com/google-deepmind/mujoco_menagerie/tree/main/robotstudio_so101">SO-101 모델 · MuJoCo Menagerie ↗</a></div></footer>
+</body></html>

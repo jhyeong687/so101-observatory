@@ -1,0 +1,178 @@
+{
+  "id": "1794978326634233000",
+  "date": "2026-11-18T14:05:26+09:00",
+  "model": "Astra 6.2",
+  "title": "낙하 후 블록 재파지",
+  "label": "2026.11.18 14:05 KST",
+  "target_lift_cm": 2,
+  "result": {
+    "lifts_cm": [
+      2.07,
+      2.08
+    ],
+    "drops": 1,
+    "released_on_floor": true,
+    "landed_after_drop": true,
+    "first_carry_cm": 4.2,
+    "second_carry_cm": 6.2,
+    "final_left_cm": 11.31
+  },
+  "cameras": [
+    "wrist",
+    "belly",
+    "top"
+  ],
+  "camera_calibration": "provisional",
+  "decisions": [
+    {
+      "seq": 0,
+      "observation": "view-000.jpg",
+      "command": {
+        "action": "aim",
+        "camera": "top",
+        "u": 348,
+        "v": 104,
+        "surface_z": 0.06,
+        "note": "탑캠에서 초록 블록 윗면을 찾아 그 위로 접근",
+        "seq": 0
+      }
+    },
+    {
+      "seq": 1,
+      "observation": "view-001.jpg",
+      "command": {
+        "action": "descend",
+        "z": 0.043,
+        "note": "벨리캠에서 블록이 열린 집게 아래에 보여 양옆으로 내림",
+        "seq": 1
+      }
+    },
+    {
+      "seq": 2,
+      "observation": "view-002.jpg",
+      "command": {
+        "action": "close",
+        "note": "손목캠에서 집게 끝이 블록 옆면에 닿아 집게 닫기",
+        "seq": 2
+      }
+    },
+    {
+      "seq": 3,
+      "observation": "view-003.jpg",
+      "command": {
+        "action": "lift",
+        "dz": 0.02,
+        "note": "벨리캠에서 양쪽 집게 사이에 블록이 보여 수직으로 2cm 상승",
+        "seq": 3
+      }
+    },
+    {
+      "seq": 4,
+      "observation": "view-004.jpg",
+      "command": {
+        "action": "carry",
+        "dy": 0.08,
+        "note": "블록이 바닥에서 떠서 탑캠 기준 왼쪽으로 운반 시작",
+        "seq": 4
+      }
+    },
+    {
+      "seq": 5,
+      "observation": "view-005.jpg",
+      "command": {
+        "action": "park",
+        "note": "블록이 바닥에 있고 탑캠이 가려져 팔을 비켜 다시 관찰",
+        "seq": 5
+      }
+    },
+    {
+      "seq": 6,
+      "observation": "view-006.jpg",
+      "command": {
+        "action": "aim",
+        "camera": "top",
+        "u": 310,
+        "v": 102,
+        "surface_z": 0.06,
+        "note": "낙하 후 새 탑캠 사진에서 초록색 윗면 중심 (310, 102)을 골라 접근",
+        "seq": 6
+      }
+    },
+    {
+      "seq": 7,
+      "observation": "view-007.jpg",
+      "command": {
+        "action": "descend",
+        "z": 0.043,
+        "note": "손목캠에 블록 윗면이 보이고 벨리캠에서 열린 집게가 그 위에 있어 블록 옆면 높이로 하강",
+        "seq": 7
+      }
+    },
+    {
+      "seq": 8,
+      "observation": "view-008.jpg",
+      "command": {
+        "action": "close",
+        "note": "벨리캠에서 블록의 양옆까지 집게가 내려온 것을 확인하고 재파지",
+        "seq": 8
+      }
+    },
+    {
+      "seq": 9,
+      "observation": "view-009.jpg",
+      "command": {
+        "action": "lift",
+        "dz": 0.02,
+        "note": "두 집게 사이에 블록이 있어 2 cm 올린 뒤 바닥과의 간격을 확인",
+        "seq": 9
+      }
+    },
+    {
+      "seq": 10,
+      "observation": "view-010.jpg",
+      "command": {
+        "action": "carry",
+        "dy": 0.045,
+        "note": "벨리캠에 블록 바닥과 그림자 사이가 보여 재파지 성공으로 판단하고 왼쪽으로 4.5 cm 더 운반",
+        "seq": 10
+      }
+    },
+    {
+      "seq": 11,
+      "observation": "view-011.jpg",
+      "command": {
+        "action": "lower",
+        "dz": -0.02,
+        "note": "왼쪽 위치에서 블록이 집게에 유지되어 바닥까지 천천히 하강",
+        "seq": 11
+      }
+    },
+    {
+      "seq": 12,
+      "observation": "view-012.jpg",
+      "command": {
+        "action": "open",
+        "note": "벨리캠에서 블록 밑면이 바닥 그림자에 닿아 집게를 열고 놓기",
+        "seq": 12
+      }
+    },
+    {
+      "seq": 13,
+      "observation": "view-013.jpg",
+      "command": {
+        "action": "park",
+        "note": "열린 집게 아래 블록이 보여 팔을 비켜 최종 위치와 정착 여부를 확인",
+        "seq": 13
+      }
+    },
+    {
+      "seq": 14,
+      "observation": "view-014.jpg",
+      "command": {
+        "action": "finish",
+        "note": "팔을 뺀 뒤 벨리캠과 탑캠에서 블록이 처음보다 왼쪽 바닥에 서 있는 것을 확인",
+        "seq": 14
+      }
+    }
+  ]
+}
